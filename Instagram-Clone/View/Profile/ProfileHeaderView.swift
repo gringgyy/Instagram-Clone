@@ -17,38 +17,43 @@ struct ProfileHeaderView: View {
         VStack(alignment: .leading) {
             HStack {
                 ZStack {
-                    if let imageURL = viewModel.user.profileImageURL {
-                        KFImage(URL(string:  imageURL))
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: 80, height: 80)
-                            .clipShape(Circle())
-                            .padding(.leading, 16)
-                    } else {
-                        Button {
-                            imagePickerPresented.toggle()
-                        } label: {
-                            Image(systemName: "person.crop.circle.fill")
-                                .resizeTo(width: 80, height: 80)
+                    Button {
+                        imagePickerPresented.toggle()
+                    } label: {
+                        if let imageURL = viewModel.user.profileImageURL {
+                            KFImage(URL(string:  imageURL))
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 80, height: 80)
                                 .clipShape(Circle())
                                 .padding(.leading, 16)
-                        }
-                        .sheet(isPresented: $imagePickerPresented) {
-                            loadImage()
-                        } content: {
-                            ImagePicker(image: $selectedImage)
+                        } else {
+                        Image(systemName: "person.crop.circle.fill")
+                            .resizeTo(width: 80, height: 80)
+                            .clipShape(Circle())
+                            .padding(.leading, 16)
                         }
                     }
+                    .sheet(isPresented: $imagePickerPresented) {
+                        loadImage()
+                    } content: {
+                        ImagePicker(image: $selectedImage)
                 }
-            
-                Spacer()
+            }
                 
                 HStack(spacing: 16) {
                     UserStatView(value: 210, title: "Posts")
                     UserStatView(value: 210, title: "Followers")
                     UserStatView(value: 210, title: "Followings")
                 }
-                .padding(.trailing, 32)
+            }
+            Text(viewModel.user.fullname)
+                .font(.system(size: 15, weight: .semibold))
+                .padding([.leading, .top])
+            HStack {
+                Spacer()
+                ProfileButtonView(viewModel: viewModel)
+                Spacer()
             }
         }
     }

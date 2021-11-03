@@ -72,7 +72,6 @@ class AuthViewModel: ObservableObject {
                 print(error.localizedDescription)
                 return
             }
-            
             guard let user = try? snap?.data(as: User.self) else { return }
             self.currentUser = user
         }

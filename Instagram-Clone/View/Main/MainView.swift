@@ -60,6 +60,7 @@ struct MainView: View {
                     .tag(4)
             }
             .navigationTitle(tabTitle)
+            .navigationBarTitleDisplayMode(.inline)
             .navigationBarItems(trailing: logOutButton)
             .accentColor(.black)
         }

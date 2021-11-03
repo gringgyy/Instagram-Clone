@@ -6,21 +6,28 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct FeedCell: View {
+    @ObservedObject var viewModel: FeedCellViewModel
+    
     var body: some View {
         VStack(alignment: .leading) {
-            HStack {
-                Image("lisa")
-                    .resizeTo(width: 36, height: 36)
-                    .clipShape(Circle())
-                
-                Text("lisablackpink")
-                    .font(.system(size: 14, weight: .semibold))
+            if let user = viewModel.post.user {
+                NavigationLink(destination: ProfileView(user: user)) {
+                    HStack {
+                        KFImage(URL(string: viewModel.post.ownerImageURL))
+                            .resizeTo(width: 36, height: 36)
+                            .clipShape(Circle())
+                        
+                        Text(viewModel.post.ownerUsername)
+                            .font(.system(size: 14, weight: .semibold))
+                    }
+                    .padding([.leading, .bottom], 8)
+                }
             }
-            .padding([.leading, .bottom], 8)
             
-            Image("lisa")
+            KFImage(URL(string: viewModel.post.imageURL))
                 .resizable()
                 .scaledToFill()
                 .frame(maxHeight: 440)
@@ -42,15 +49,15 @@ struct FeedCell: View {
             }
             .padding(.leading, 4)
             
-            Text("25 likes")
+            Text("\(viewModel.post.likes) likes")
                 .font(.system(size: 14, weight: .semibold))
                 .padding(.leading, 8)
                 .padding(.bottom, 0.5)
             
             HStack {
-                Text("lisablackpink")
+                Text(viewModel.post.ownerUsername)
                     .font(.system(size: 14, weight: .semibold))
-                Text("I look great!!")
+                Text(" \(viewModel.post.caption)")
                     .font(.system(size: 14))
             }
             .padding(.horizontal, 8)
@@ -61,11 +68,5 @@ struct FeedCell: View {
                 .padding(.leading, 8)
                 .padding(.top, -2)
         }
-    }
-}
-
-struct FeedCell_Previews: PreviewProvider {
-    static var previews: some View {
-        FeedCell()
     }
 }

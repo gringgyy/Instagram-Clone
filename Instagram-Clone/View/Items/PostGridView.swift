@@ -6,23 +6,25 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct PostGridView: View {
+    @ObservedObject var viewModel: GridViewModel
     let items = [GridItem(), GridItem(), GridItem()]
-    let width = UIScreen.main.bounds.width / 3
+    
+    init(config: PostGridConfig) {
+        viewModel = GridViewModel(config: config)
+    }
+    
     var body: some View {
-        LazyVGrid(columns: items, spacing: 2) {
-            ForEach(0..<10) { _ in
-                Image("lisa")
-                    .resizeTo(width: width, height: width)
-                    .clipped()
+        GeometryReader { proxy in
+            LazyVGrid(columns: items, spacing: 2) {
+                ForEach(viewModel.posts) { post in
+                    KFImage(URL(string: post.imageURL))
+                        .resizeTo(width: proxy.size.width / 3, height: proxy.size.height / 3)
+                        .clipped()
+                }
             }
         }
-    }
-}
-
-struct PostGridView_Previews: PreviewProvider {
-    static var previews: some View {
-        PostGridView()
     }
 }

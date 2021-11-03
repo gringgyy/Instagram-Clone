@@ -7,8 +7,18 @@
 
 import SwiftUI
 import UIKit
+import Kingfisher
 
 extension Image {
+    func resizeTo(width: CGFloat, height: CGFloat) -> some View {
+        self.resizable()
+            .scaledToFill()
+            .frame(width: width, height: height)
+            .clipped()
+    }
+}
+
+extension KFImage {
     func resizeTo(width: CGFloat, height: CGFloat) -> some View {
         self.resizable()
             .scaledToFill()

@@ -18,4 +18,8 @@ struct User: Decodable, Identifiable {
     mutating func updateProfileImageURL(url: String) {
         profileImageURL = url
     }
+    
+    var isCurrentUser: Bool {
+        AuthViewModel.shared.userSession?.uid == id
+    }
 }
