@@ -8,40 +8,59 @@
 import SwiftUI
 import Kingfisher
 struct NotificationCell: View {
-    let notification: Notification
+    @ObservedObject var viewModel: NotificationsCellViewModel
+    
+    var didFollow: Bool {
+        viewModel.notification.didFollow ?? false
+    }
     
     var body: some View {
         HStack {
-            if let imageURL = notification.profileImageURL {
-                KFImage(URL(string: imageURL))
-                    .resizeTo(width: 40, height: 40)
-                    .clipShape(Circle())
-            } else {
-                Image(systemName: "person.crop.circlr.fill")
-                    .resizeTo(width: 40, height: 40)
-                    .clipShape(Circle())
+            if let user = viewModel.notification.user {
+                NavigationLink(destination: ProfileView(user: user)) {
+                    if let imageURL = viewModel.notification.profileImageURL {
+                        KFImage(URL(string: imageURL))
+                            .resizeTo(width: 40, height: 40)
+                            .clipShape(Circle())
+                    } else {
+                        Image(systemName: "person.crop.circlr.fill")
+                            .resizeTo(width: 40, height: 40)
+                            .clipShape(Circle())
+                    }
+                    Text(viewModel.notification.username)
+                        .font(.system(size: 14, weight: .semibold))
+                    
+                    Text(viewModel.notification.type.notificationMessage)
+                        .font(.system(size: 15))
+                    
+                    Text(viewModel.timestamp)
+                        .foregroundColor(.gray)
+                        .font(.system(size: 12))
+                }
             }
-            Text("lisablackpink")
-                .font(.system(size: 14, weight: .semibold))
-            
-            Text("has followed you.")
-                .font(.system(size: 15))
-            
-            Text("2H")
-                .foregroundColor(.gray)
-                .font(.system(size: 12))
-            
             Spacer()
             
-            Text("Follow")
-                .font(.system(size: 14, weight: .semibold))
-                .frame(width: 100, height: 32)
-                .foregroundColor(.white)
-                .background(Color.blue)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 3)
-                        .stroke(Color.gray, lineWidth: 1)
-                )
+            if viewModel.notification.type == .follow {
+                Button {
+                    didFollow ? viewModel.unfollow(): viewModel.follow()
+                } label: {
+                    Text(didFollow ? "Following" : "Follow Back")
+                        .font(.system(size: 14, weight: .semibold))
+                        .frame(width: 100, height: 32)
+                        .foregroundColor(didFollow ? .black : .white)
+                        .background(didFollow ? Color.white : Color.blue)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 3)
+                                .stroke(Color.gray, lineWidth: didFollow ? 1 : 0)
+                        )
+                }.cornerRadius(3)
+            } else if let post = viewModel.notification.post {
+                NavigationLink(destination: FeedCell(viewModel: FeedCellViewModel(post: post))) {
+                    KFImage(URL(string: post.imageURL))
+                        .resizeTo(width: 40, height: 40)
+                        .clipped()
+                }
+            }
         }
         .padding(.horizontal)
     }

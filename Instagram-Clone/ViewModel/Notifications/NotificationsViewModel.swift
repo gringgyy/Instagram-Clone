@@ -9,7 +9,7 @@ import SwiftUI
 import Firebase
 
 class NotificationsViewModel: ObservableObject {
-    @Published var notifications = [Notification]()
+    @Published var notification = [Notification]()
     
     init() {
         fetchNotifications()
@@ -24,7 +24,7 @@ class NotificationsViewModel: ObservableObject {
                 return
             }
             guard let documents = snap?.documents else { return }
-            self.notifications = documents.compactMap{ try? $0.data(as: Notification.self) }
+            self.notification = documents.compactMap{ try? $0.data(as: Notification.self) }
         }
     }
     static func sendNotification(withUID uid: String, type: NotificationType, post: Post? = nil) {
