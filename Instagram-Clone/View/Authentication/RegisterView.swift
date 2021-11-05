@@ -9,9 +9,9 @@ import SwiftUI
 
 struct RegisterView: View {
     @State var email = ""
-    @State var password = ""
     @State var username = ""
     @State var fullname = ""
+    @State var password = ""
     
     @EnvironmentObject var viewModel: AuthViewModel
     var body: some View {

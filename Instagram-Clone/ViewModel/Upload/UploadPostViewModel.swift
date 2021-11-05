@@ -21,7 +21,6 @@ class UploadPostViewModel: ObservableObject {
                 "likes": 0,
                 "imageURL": imageURL,
                 "ownerUID": uid,
-                "ownerImageURL": user.profileImageURL as Any,
                 "ownerUsername": user.username
             ] as [String: Any]
             

@@ -6,14 +6,21 @@
 //
 
 import SwiftUI
-
+import Kingfisher
 struct NotificationCell: View {
+    let notification: Notification
+    
     var body: some View {
         HStack {
-            Image("lisa")
-                .resizeTo(width: 40, height: 40)
-                .clipShape(Circle())
-            
+            if let imageURL = notification.profileImageURL {
+                KFImage(URL(string: imageURL))
+                    .resizeTo(width: 40, height: 40)
+                    .clipShape(Circle())
+            } else {
+                Image(systemName: "person.crop.circlr.fill")
+                    .resizeTo(width: 40, height: 40)
+                    .clipShape(Circle())
+            }
             Text("lisablackpink")
                 .font(.system(size: 14, weight: .semibold))
             
@@ -37,11 +44,5 @@ struct NotificationCell: View {
                 )
         }
         .padding(.horizontal)
-    }
-}
-
-struct NotificationCell_Previews: PreviewProvider {
-    static var previews: some View {
-        NotificationCell()
     }
 }

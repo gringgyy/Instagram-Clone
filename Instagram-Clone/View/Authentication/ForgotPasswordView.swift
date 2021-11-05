@@ -20,7 +20,7 @@ struct ForgotPasswordView: View {
                 Image("instagram-text-logo")
                     .renderingMode(.template)
                     .resizable()
-                    .scaledToFill()
+                    .scaledToFit()
                     .frame(width: 220, height: 220)
                     .foregroundColor(.black)
                 

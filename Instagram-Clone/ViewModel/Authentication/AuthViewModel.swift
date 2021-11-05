@@ -16,8 +16,10 @@ class AuthViewModel: ObservableObject {
     static let shared = AuthViewModel()
     
     init() {
-        userSession = Auth.auth().currentUser
+        //signOut()
+        userSession = nil
         fetchUser()
+        //signOut()
     }
     
     func signIn(withEmail email: String, password: String) {
@@ -28,6 +30,7 @@ class AuthViewModel: ObservableObject {
             }
             guard let user = result?.user else { return }
             
+            print("userSession: \(user)")
             self.userSession = user
             self.fetchUser()
         }
@@ -70,10 +73,14 @@ class AuthViewModel: ObservableObject {
         Firestore.firestore().collection("users").document(uid).getDocument { (snap, error) in
             if let error = error {
                 print(error.localizedDescription)
+                print("error")
                 return
             }
             guard let user = try? snap?.data(as: User.self) else { return }
+            print("fetch user")
+            print("user: \(user)")
             self.currentUser = user
+            print(self.currentUser!)
         }
     }
 }

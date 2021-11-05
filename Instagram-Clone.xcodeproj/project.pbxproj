@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8611A39D2734ED7E00EA6237 /* NotificationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8611A39C2734ED7E00EA6237 /* NotificationsViewModel.swift */; };
+		8611A39F2734EDF100EA6237 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8611A39E2734EDF100EA6237 /* Notification.swift */; };
 		8671BD1D27307D4800078085 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 8671BD1C27307D4800078085 /* FirebaseAuth */; };
 		8671BD1F27307D4800078085 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 8671BD1E27307D4800078085 /* FirebaseDatabase */; };
 		8671BD2127307D4800078085 /* FirebaseDatabaseSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 8671BD2027307D4800078085 /* FirebaseDatabaseSwift-Beta */; };
@@ -56,6 +58,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8611A39C2734ED7E00EA6237 /* NotificationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewModel.swift; sourceTree = "<group>"; };
+		8611A39E2734EDF100EA6237 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		868CCF7F27216887002475CA /* Instagram-Clone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Instagram-Clone.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		868CCF8227216887002475CA /* Instagram_CloneApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Instagram_CloneApp.swift; sourceTree = "<group>"; };
 		868CCF8427216887002475CA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -117,6 +121,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8611A39B2734ED5600EA6237 /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				8611A39C2734ED7E00EA6237 /* NotificationsViewModel.swift */,
+			);
+			path = Notifications;
+			sourceTree = "<group>";
+		};
 		868CCF7627216887002475CA = {
 			isa = PBXGroup;
 			children = (
@@ -263,6 +275,7 @@
 		868CCFD6272FFA01002475CA /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				8611A39B2734ED5600EA6237 /* Notifications */,
 				86E91BC12733046F002E512A /* Items */,
 				86E91BBE2732ECA3002E512A /* Search */,
 				86E91BBB2732E978002E512A /* Feed */,
@@ -286,6 +299,7 @@
 			children = (
 				868CCFDB273039FE002475CA /* User.swift */,
 				86E91BB92732E84B002E512A /* Post.swift */,
+				8611A39E2734EDF100EA6237 /* Notification.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -428,6 +442,7 @@
 				868CCF9D27217BD9002475CA /* SearchView.swift in Sources */,
 				868CCFAF2722B7A5002475CA /* UserCell.swift in Sources */,
 				868CCFDF27303F5C002475CA /* ProfileViewModel.swift in Sources */,
+				8611A39D2734ED7E00EA6237 /* NotificationsViewModel.swift in Sources */,
 				868CCFC2272FD417002475CA /* SigninView.swift in Sources */,
 				868CCF9B27217BC9002475CA /* FeedView.swift in Sources */,
 				868CCFAB2721D7A2002475CA /* PostGridView.swift in Sources */,
@@ -439,6 +454,7 @@
 				868CCFC6272FDBA5002475CA /* ForgotPasswordView.swift in Sources */,
 				868CCF8327216887002475CA /* Instagram_CloneApp.swift in Sources */,
 				86E91BBD2732E98F002E512A /* FeedViewModel.swift in Sources */,
+				8611A39F2734EDF100EA6237 /* Notification.swift in Sources */,
 				86E91BC727331397002E512A /* FeedCellViewModel.swift in Sources */,
 				868CCFA82721BA23002475CA /* Extensions.swift in Sources */,
 				868CCFBB272FA22A002475CA /* UserStatView.swift in Sources */,

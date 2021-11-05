@@ -11,15 +11,24 @@ import Kingfisher
 struct FeedCell: View {
     @ObservedObject var viewModel: FeedCellViewModel
     
+    var didLike: Bool {
+        viewModel.post.didLike ?? false
+    }
+    
     var body: some View {
         VStack(alignment: .leading) {
             if let user = viewModel.post.user {
                 NavigationLink(destination: ProfileView(user: user)) {
                     HStack {
-                        KFImage(URL(string: viewModel.post.ownerImageURL))
+                        if let imageURL = viewModel.post.ownerImageURL {
+                        KFImage(URL(string: imageURL))
                             .resizeTo(width: 36, height: 36)
                             .clipShape(Circle())
-                        
+                        } else {
+                            Image(systemName: "person.crop.circle.fill")
+                                .resizeTo(width: 36, height: 36)
+                                .clipShape(Circle())
+                        }
                         Text(viewModel.post.ownerUsername)
                             .font(.system(size: 14, weight: .semibold))
                     }
@@ -34,10 +43,16 @@ struct FeedCell: View {
                 .clipped()
             
             HStack {
-                Image(systemName: "heart")
-                    .resizeTo(width: 20, height: 20)
-                    .font(.system(size: 20))
-                    .padding(4)
+                Button {
+                    didLike ? viewModel.unlike() : viewModel.like()
+                } label: {
+                    Image(systemName: didLike ? "heart.fill" : "heart")
+                        .resizeTo(width: 20, height: 20)
+                        .foregroundColor(didLike ? .red : .black)
+                        .font(.system(size: 20))
+                        .padding(4)
+                }
+                
                 Image(systemName: "bubble.right")
                     .resizeTo(width: 20, height: 20)
                     .font(.system(size: 20))
@@ -49,7 +64,7 @@ struct FeedCell: View {
             }
             .padding(.leading, 4)
             
-            Text("\(viewModel.post.likes) likes")
+            Text(viewModel.likeText)
                 .font(.system(size: 14, weight: .semibold))
                 .padding(.leading, 8)
                 .padding(.bottom, 0.5)
@@ -62,7 +77,7 @@ struct FeedCell: View {
             }
             .padding(.horizontal, 8)
             
-            Text("2H")
+            Text(viewModel.timestamp)
                 .font(.system(size: 14))
                 .foregroundColor(.gray)
                 .padding(.leading, 8)

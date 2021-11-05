@@ -14,6 +14,7 @@ struct User: Decodable, Identifiable {
     let fullname: String
     var profileImageURL: String?
     @DocumentID var id: String?
+    var stats: UserStatsData?
     
     mutating func updateProfileImageURL(url: String) {
         profileImageURL = url
@@ -22,4 +23,12 @@ struct User: Decodable, Identifiable {
     var isCurrentUser: Bool {
         AuthViewModel.shared.userSession?.uid == id
     }
+    var didFollow: Bool? = false
 }
+
+struct UserStatsData: Decodable {
+    var following: Int
+    var followers: Int
+    var posts: Int
+}
+
