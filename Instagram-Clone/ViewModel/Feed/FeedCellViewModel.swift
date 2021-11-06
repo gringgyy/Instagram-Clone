@@ -72,9 +72,11 @@ class FeedCellViewModel: ObservableObject {
         }
     }
     func unlike() {
-        if let didLike = post.didLike, didLike {
+        
+        if let didLike = post.didLike, !didLike {
             return
         }
+        
         guard let postID = post.id else { return }
         guard let userID = AuthViewModel.shared.userSession?.uid else { return }
         

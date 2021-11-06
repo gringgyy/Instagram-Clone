@@ -20,6 +20,7 @@ struct SearchView: View {
             ZStack {
                 if inSearchMode {
                     UserListView(viewModel: viewModel, searchText: $searchText)
+                        .padding(.leading)
                 } else {
                     PostGridView(config: .explore)
                 }

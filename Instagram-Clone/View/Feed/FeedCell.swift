@@ -53,10 +53,13 @@ struct FeedCell: View {
                         .padding(4)
                 }
                 
-                Image(systemName: "bubble.right")
-                    .resizeTo(width: 20, height: 20)
-                    .font(.system(size: 20))
-                    .padding(4)
+                NavigationLink(destination: CommentsView(post: viewModel.post)) {
+                    Image(systemName: "bubble.right")
+                        .resizeTo(width: 20, height: 20)
+                        .font(.system(size: 20))
+                        .padding(4)
+                }
+                
                 Image(systemName: "paperplane")
                     .resizeTo(width: 20, height: 20)
                     .font(.system(size: 20))

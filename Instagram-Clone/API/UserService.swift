@@ -19,7 +19,7 @@ struct UserService {
                 return
             }
             
-            Firestore.firestore().collection("followers").document(uid).collection("user-follwers").document(uid).setData([:], completion: completion)
+            Firestore.firestore().collection("followers").document(uid).collection("user-followers").document(uid).setData([:], completion: completion)
         }
     }
     
@@ -32,7 +32,7 @@ struct UserService {
                 return
             }
             
-            Firestore.firestore().collection("followers").document(uid).collection("user-follwers").document(uid).delete(completion: completion)
+            Firestore.firestore().collection("followers").document(uid).collection("user-followers").document(uid).delete(completion: completion)
         }
     }
     

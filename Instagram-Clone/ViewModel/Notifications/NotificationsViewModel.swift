@@ -42,7 +42,7 @@ class NotificationsViewModel: ObservableObject {
             data["postID"] = id
         }
         
-        Firestore.firestore().collection("notification").document(uid).collection("user-notification").addDocument(data: data) { error in
+        Firestore.firestore().collection("notifications").document(uid).collection("user-notifications").addDocument(data: data) { error in
             if let error = error {
                 print(error.localizedDescription)
                 return

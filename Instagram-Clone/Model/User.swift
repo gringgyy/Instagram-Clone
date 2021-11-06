@@ -24,6 +24,7 @@ struct User: Decodable, Identifiable {
         AuthViewModel.shared.userSession?.uid == id
     }
     var didFollow: Bool? = false
+    var bio: String?
 }
 
 struct UserStatsData: Decodable {

@@ -16,10 +16,8 @@ class AuthViewModel: ObservableObject {
     static let shared = AuthViewModel()
     
     init() {
-        //signOut()
-        userSession = nil
+        userSession = Auth.auth().currentUser
         fetchUser()
-        //signOut()
     }
     
     func signIn(withEmail email: String, password: String) {
@@ -39,6 +37,7 @@ class AuthViewModel: ObservableObject {
     func signOut() {
         userSession = nil
         try? Auth.auth().signOut()
+        print("sign out!!!!!")
     }
     
     func register(withEmail email: String, password: String, username: String, fullname: String) {
@@ -77,10 +76,7 @@ class AuthViewModel: ObservableObject {
                 return
             }
             guard let user = try? snap?.data(as: User.self) else { return }
-            print("fetch user")
-            print("user: \(user)")
             self.currentUser = user
-            print(self.currentUser!)
         }
     }
 }

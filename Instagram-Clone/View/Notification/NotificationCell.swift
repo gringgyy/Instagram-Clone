@@ -23,7 +23,7 @@ struct NotificationCell: View {
                             .resizeTo(width: 40, height: 40)
                             .clipShape(Circle())
                     } else {
-                        Image(systemName: "person.crop.circlr.fill")
+                        Image(systemName: "person.crop.circle.fill")
                             .resizeTo(width: 40, height: 40)
                             .clipShape(Circle())
                     }

@@ -48,6 +48,7 @@ class ProfileViewModel: ObservableObject {
     
     
     func unfollow() {
+
         if let didFollow = user.didFollow, !didFollow {
             return
         }
@@ -71,7 +72,7 @@ class ProfileViewModel: ObservableObject {
     func checkStats() {
         guard let uid = user.id else { return }
         
-        Firestore.firestore().collection("followers").document(uid).collection("user-follower").getDocuments { (snap , error) in
+        Firestore.firestore().collection("followers").document(uid).collection("user-followers").getDocuments { (snap , error) in
             if let error = error {
                 print(error.localizedDescription)
                 return

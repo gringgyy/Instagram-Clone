@@ -11,11 +11,13 @@ struct ProfileView: View {
     @State var user: User
     
     var body: some View {
-        VStack(spacing: 32) {
-            ProfileHeaderView(viewModel: ProfileViewModel(user: user))
-                .padding()
-            if let currentProfileID = user.id {
-                PostGridView(config: .profile(currentProfileID))
+        ScrollView {
+            VStack(spacing: 32) {
+                ProfileHeaderView(viewModel: ProfileViewModel(user: user))
+                    .padding()
+                if let currentProfileID = user.id {
+                    PostGridView(config: .profile(currentProfileID))
+                }
             }
         }
     }

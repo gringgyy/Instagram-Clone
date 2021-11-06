@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ProfileButtonView: View {
     @ObservedObject var viewModel: ProfileViewModel
+    @State var editProfileShow = false
+    
     var didFollow: Bool {
         viewModel.user.didFollow ?? false
     }
@@ -16,7 +18,7 @@ struct ProfileButtonView: View {
     var body: some View {
         if viewModel.user.isCurrentUser {
             Button {
-                
+                editProfileShow.toggle()
             } label: {
                 Text("Edit Profile")
                     .font(.system(size: 14, weight: .semibold))
@@ -26,7 +28,10 @@ struct ProfileButtonView: View {
                         RoundedRectangle(cornerRadius: 3)
                             .stroke(Color.gray, lineWidth: 1)
                     )
+            }.sheet(isPresented: $editProfileShow) {
+                EditProfileView(user: $viewModel.user)
             }
+
         } else {
             HStack(spacing: 16) {
                 Button {
@@ -43,17 +48,17 @@ struct ProfileButtonView: View {
                         )
                 }
                 .cornerRadius(3)
-                Button {
-                    
-                } label: {
-                    Text("Message")
-                        .font(.system(size: 14, weight: .semibold))
-                        .frame(width: 172, height: 32)
-                        .foregroundColor(.black)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 3)
-                                .stroke(Color.gray, lineWidth: 1)
-                        )
+                if let user = viewModel.user {
+                    NavigationLink(destination: MessageChatView(user: user)) {
+                        Text("Message")
+                            .font(.system(size: 14, weight: .semibold))
+                            .frame(width: 172, height: 32)
+                            .foregroundColor(.black)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 3)
+                                    .stroke(Color.gray, lineWidth: 1)
+                            )
+                    }
                 }
             }
         }
